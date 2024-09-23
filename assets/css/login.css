@@ -41,16 +41,16 @@ h2 {
     font-size: 20px;
 }
 
-.form-group input[type="text"],
+.form-group input[type="email"],
 .form-group input[type="password"] {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
 .btn-login {
-    width: 100%;
+    width: 50%;
     background-color: #4CAF50;
     color: white;
     padding: 10px;

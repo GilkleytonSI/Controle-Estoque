@@ -204,6 +204,10 @@ form button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+#configuracoes h2{
+    color: #000;
+}
+
 form input[type="number"],
 form input[type="email"],
 form select {
@@ -216,6 +220,10 @@ form select {
 
 form input[type="checkbox"] {
     margin-left: 10px;
+}
+
+form .form-group label{
+    color: #000;
 }
 
 form .btn-salvar {

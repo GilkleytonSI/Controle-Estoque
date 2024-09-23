@@ -1,0 +1,84 @@
+<?php
+class Produto {
+    private $conn;
+    private $table = 'produtos';
+
+    public $id;
+    public $nome;
+    public $quantidade;
+    public $preco;
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    // Criar produto
+    public function create() {
+        $query = "INSERT INTO " . $this->table . " (nome, quantidade, preco) VALUES (:nome, :quantidade, :preco)";
+        $stmt = $this->conn->prepare($query);
+
+        // Limpar dados
+        $this->nome = htmlspecialchars(strip_tags($this->nome));
+        $this->quantidade = htmlspecialchars(strip_tags($this->quantidade));
+        $this->preco = htmlspecialchars(strip_tags($this->preco));
+
+        // Bind dos dados
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':quantidade', $this->quantidade);
+        $stmt->bindParam(':preco', $this->preco);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Listar produtos
+    public function read() {
+        $query = "SELECT * FROM " . $this->table;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    // Atualizar produto
+    public function update() {
+        $query = "UPDATE " . $this->table . " SET nome = :nome, quantidade = :quantidade, preco = :preco WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+
+        // Limpar dados
+        $this->nome = htmlspecialchars(strip_tags($this->nome));
+        $this->quantidade = htmlspecialchars(strip_tags($this->quantidade));
+        $this->preco = htmlspecialchars(strip_tags($this->preco));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        // Bind dos dados
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':quantidade', $this->quantidade);
+        $stmt->bindParam(':preco', $this->preco);
+        $stmt->bindParam(':id', $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Deletar produto
+    public function delete() {
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+
+        // Limpar dados
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        // Bind do ID
+        $stmt->bindParam(':id', $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+}
+?>
